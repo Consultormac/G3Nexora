@@ -1,0 +1,494 @@
+/* =====================================
+   RESET
+===================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#F7F8FC;
+    color:#07112D;
+    overflow-x:hidden;
+}
+
+/* =====================================
+   VARIABLES - COLORES FIRMA G3NeXORA
+===================================== */
+
+:root{
+    --navy:#07112D;
+    --navy-2:#0B1736;
+
+    --purple:#6D19D8;
+    --purple-light:#8A2CFF;
+    --purple-dark:#3B087E;
+
+    --blue:#0A6CFF;
+    --blue-soft:#EAF2FF;
+
+    --background:#F7F8FC;
+    --surface:#FFFFFF;
+    --surface-soft:#F1F4FA;
+
+    --text:#07112D;
+    --text-secondary:#4A5872;
+
+    --border:rgba(7,17,45,.10);
+
+    --shadow:
+        0 18px 45px rgba(7,17,45,.08),
+        0 0 24px rgba(109,25,216,.10);
+}
+
+/* =====================================
+   LINKS
+===================================== */
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* =====================================
+   HEADER
+===================================== */
+
+.site-header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:16px 6%;
+    z-index:999;
+
+    background:rgba(255,255,255,.90);
+    backdrop-filter:blur(20px);
+
+    border-bottom:1px solid rgba(7,17,45,.08);
+    box-shadow:0 8px 30px rgba(7,17,45,.04);
+}
+
+.brand img{
+    height:112px;
+    width:auto;
+    display:block;
+}
+
+.main-nav{
+    display:flex;
+    gap:35px;
+}
+
+.main-nav a{
+    color:var(--navy);
+    font-size:15px;
+    font-weight:500;
+    transition:.3s;
+}
+
+.main-nav a:hover{
+    color:var(--purple);
+}
+
+/* =====================================
+   HERO
+===================================== */
+
+.hero{
+    min-height:100vh;
+    padding:165px 8% 95px;
+
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    align-items:start;
+    gap:60px;
+
+    background:
+    radial-gradient(circle at 82% 18%, rgba(138,44,255,.14), transparent 32%),
+    radial-gradient(circle at 18% 82%, rgba(10,108,255,.12), transparent 34%),
+    linear-gradient(135deg,#FFFFFF 0%,#F7F8FC 45%,#EEF3FF 100%);
+}
+
+.badge{
+    display:inline-block;
+
+    padding:12px 22px;
+    border-radius:999px;
+
+    border:1px solid rgba(109,25,216,.25);
+    background:rgba(109,25,216,.06);
+
+    color:var(--purple);
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:1px;
+
+    margin-bottom:28px;
+}
+
+.hero-content h1{
+    font-size:56px;
+    line-height:1.05;
+    letter-spacing:-3px;
+    margin-bottom:25px;
+    max-width:850px;
+    color:var(--navy);
+}
+
+.hero-content p{
+    font-size:18px;
+    line-height:1.8;
+    color:var(--text-secondary);
+    max-width:760px;
+    margin-bottom:40px;
+}
+
+/* =====================================
+   BOTONES
+===================================== */
+
+.buttons{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+}
+
+.btn-primary{
+    background:
+    linear-gradient(
+    135deg,
+    var(--purple-light),
+    var(--purple),
+    var(--blue)
+    );
+
+    color:white;
+    padding:16px 30px;
+    border-radius:10px;
+    font-weight:700;
+    transition:.3s;
+
+    box-shadow:0 14px 28px rgba(109,25,216,.22);
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 18px 38px rgba(109,25,216,.34);
+}
+
+.btn-secondary{
+    padding:16px 30px;
+    border-radius:10px;
+
+    border:1px solid rgba(109,25,216,.28);
+    color:var(--navy);
+
+    background:white;
+    transition:.3s;
+    font-weight:700;
+}
+
+.btn-secondary:hover{
+    border-color:var(--purple);
+    color:var(--purple);
+    box-shadow:0 14px 28px rgba(109,25,216,.12);
+}
+
+.centered{
+    justify-content:center;
+}
+
+/* =====================================
+   HERO PANEL
+===================================== */
+
+.hero-panel{
+    background:
+    linear-gradient(
+    145deg,
+    rgba(255,255,255,.95),
+    rgba(247,248,252,.92)
+    );
+
+    border:1px solid rgba(109,25,216,.13);
+    border-radius:30px;
+    padding:35px;
+
+    box-shadow:var(--shadow);
+}
+
+.hero-panel-header{
+    font-size:28px;
+    font-weight:800;
+    margin-bottom:25px;
+    color:var(--navy);
+}
+
+.ecosystem-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.ecosystem-item{
+    padding:18px;
+    border-radius:14px;
+
+    background:#FFFFFF;
+    border:1px solid rgba(109,25,216,.12);
+
+    color:var(--navy);
+    box-shadow:0 8px 24px rgba(7,17,45,.04);
+}
+
+/* =====================================
+   SECTIONS
+===================================== */
+
+section{
+    padding:85px 6%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.section-title h2{
+    font-size:48px;
+    margin-bottom:15px;
+    color:var(--navy);
+}
+
+.section-title p{
+    color:var(--text-secondary);
+    font-size:18px;
+    max-width:900px;
+    margin:auto;
+    line-height:1.8;
+}
+
+/* =====================================
+   SERVICES
+===================================== */
+
+.services-grid{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+}
+
+.service-card,
+.workforce-card{
+    background:#FFFFFF;
+
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:30px;
+    transition:.3s;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+
+    box-shadow:0 12px 35px rgba(7,17,45,.055);
+}
+
+.service-card:hover,
+.workforce-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(109,25,216,.35);
+    box-shadow:var(--shadow);
+}
+
+.icon{
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+.service-card h3,
+.workforce-card h3{
+    font-size:26px;
+    margin-bottom:15px;
+    color:var(--navy);
+}
+
+.service-card p,
+.workforce-card p{
+    color:var(--text-secondary);
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+.service-card ul,
+.workforce-card ul{
+    list-style:none;
+    display:grid;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.service-card ul li,
+.workforce-card ul li{
+    color:#1E2B48;
+}
+
+.service-card ul li::before,
+.workforce-card ul li::before{
+    content:"• ";
+    color:var(--purple);
+    font-weight:900;
+}
+
+.service-card a,
+.workforce-card a{
+    color:var(--purple);
+    font-weight:800;
+}
+
+/* =====================================
+   WORKFORCE
+===================================== */
+
+.workforce{
+    background:
+    linear-gradient(
+    135deg,
+    rgba(109,25,216,.06),
+    rgba(10,108,255,.045)
+    );
+}
+
+.workforce-grid{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(320px,1fr));
+    gap:25px;
+}
+
+/* =====================================
+   ABOUT
+===================================== */
+
+.about{
+    background:#FFFFFF;
+}
+
+.about-content{
+    max-width:1000px;
+    margin:auto;
+    text-align:center;
+}
+
+.about-content h2{
+    font-size:48px;
+    margin-bottom:20px;
+    color:var(--navy);
+}
+
+.about-content p{
+    color:var(--text-secondary);
+    font-size:20px;
+    line-height:1.8;
+}
+
+/* =====================================
+   CTA
+===================================== */
+
+.cta{
+    text-align:center;
+    background:
+    radial-gradient(circle at center, rgba(109,25,216,.10), transparent 45%),
+    linear-gradient(135deg,#FFFFFF 0%,#F6F1FF 55%,#EEF3FF 100%);
+}
+
+.cta h2{
+    font-size:52px;
+    margin-bottom:20px;
+    color:var(--navy);
+}
+
+.cta p{
+    color:var(--text-secondary);
+    font-size:20px;
+    max-width:900px;
+    margin:auto auto 35px;
+    line-height:1.8;
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+
+.site-footer{
+    padding:35px 8%;
+    border-top:1px solid rgba(109,25,216,.14);
+
+    display:flex;
+    justify-content:space-between;
+
+    color:#62708A;
+    font-size:14px;
+
+    background:#FFFFFF;
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media(max-width:1100px){
+    .hero{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:768px){
+    .main-nav{
+        display:none;
+    }
+
+    .hero{
+        padding-top:130px;
+    }
+
+    .hero-content h1{
+        font-size:42px;
+        letter-spacing:-2px;
+    }
+
+    .section-title h2,
+    .about-content h2,
+    .cta h2{
+        font-size:34px;
+    }
+
+    .brand img{
+        height:72px;
+    }
+
+    .ecosystem-grid{
+        grid-template-columns:1fr;
+    }
+
+    .site-footer{
+        flex-direction:column;
+        gap:10px;
+        text-align:center;
+    }
+}
