@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NEXORA diseña, fabrica e instala cocinas, muebles de baño y clósets para distintos presupuestos y estilos." />
+  <title>NEXORA Living Studio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #0b1017;
+      --ink-2: #111923;
+      --paper: #f5f1e9;
+      --paper-2: #e9e4da;
+      --white: #ffffff;
+      --accent: #b7ce39;
+      --accent-soft: #dce992;
+      --muted: #8f98a4;
+      --line: rgba(255,255,255,.14);
+      --line-dark: rgba(11,16,23,.12);
+      --shadow: 0 28px 80px rgba(0,0,0,.24);
+      --radius: 28px;
+      --container: min(1180px, calc(100% - 40px));
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--white);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+    }
+
+    img { width: 100%; display: block; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    .container { width: var(--container); margin: 0 auto; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .display {
+      font-family: "Playfair Display", serif;
+      font-weight: 500;
+      letter-spacing: -.03em;
+      line-height: .98;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 52px;
+      padding: 0 22px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: .3s ease;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--ink);
+      box-shadow: 0 12px 30px rgba(183,206,57,.2);
+    }
+    .btn-primary:hover { transform: translateY(-2px); background: var(--accent-soft); }
+    .btn-ghost { border-color: rgba(255,255,255,.24); }
+    .btn-ghost:hover { background: rgba(255,255,255,.08); transform: translateY(-2px); }
+
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 50;
+      transition: .3s ease;
+    }
+    .nav.scrolled {
+      background: rgba(9,14,20,.82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner {
+      width: var(--container);
+      height: 82px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .brand-mark {
+      width: 42px;
+      aspect-ratio: 1;
+      border: 2px solid var(--accent);
+      clip-path: polygon(0 0, 100% 0, 100% 26%, 64% 26%, 64% 74%, 100% 74%, 100% 100%, 0 100%, 0 74%, 36% 74%, 36% 26%, 0 26%);
+      transform: rotate(45deg);
+    }
+    .brand-copy strong {
+      display: block;
+      font-size: .98rem;
+      letter-spacing: .34em;
+    }
+    .brand-copy span {
+      font-size: .58rem;
+      letter-spacing: .28em;
+      color: var(--accent);
+    }
+
+    .nav-links { display: flex; gap: 26px; align-items: center; }
+    .nav-links a {
+      font-size: .78rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.78);
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .menu-btn { display: none; background: none; border: 0; color: white; font-size: 1.4rem; }
+
+    .hero {
+      min-height: 100svh;
+      position: relative;
+      display: grid;
+      align-items: end;
+      background:
+        linear-gradient(90deg, rgba(8,12,18,.96) 0%, rgba(8,12,18,.84) 38%, rgba(8,12,18,.18) 72%, rgba(8,12,18,.26) 100%),
+        url("https://images.unsplash.com/photo-1556912167-f556f1f39fdf?auto=format&fit=crop&w=2200&q=88") center/cover;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 220px;
+      background: linear-gradient(transparent, var(--ink));
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: var(--container);
+      margin: 0 auto;
+      padding: 180px 0 110px;
+    }
+    .hero h1 {
+      max-width: 760px;
+      margin: 22px 0 24px;
+      font-size: clamp(4rem, 8vw, 8.6rem);
+    }
+    .hero h1 span { color: var(--accent); font-style: italic; }
+    .hero p {
+      max-width: 590px;
+      color: rgba(255,255,255,.78);
+      font-size: 1.08rem;
+      line-height: 1.8;
+    }
+    .hero-actions { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
+
+    .trust-strip {
+      position: relative;
+      z-index: 3;
+      margin-top: -30px;
+    }
+    .trust-grid {
+      width: var(--container);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--paper);
+      color: var(--ink);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .trust-item {
+      padding: 30px;
+      border-right: 1px solid var(--line-dark);
+    }
+    .trust-item:last-child { border-right: 0; }
+    .trust-item span {
+      display: block;
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+    .trust-item strong { display: block; margin-bottom: 8px; }
+    .trust-item p { margin: 0; color: #66707d; line-height: 1.6; font-size: .9rem; }
+
+    section { padding: 120px 0; }
+
+    .intro {
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .intro h2, .services h2, .process h2, .portfolio h2, .contact h2 {
+      font-size: clamp(3rem, 5vw, 5.8rem);
+      margin: 18px 0 24px;
+    }
+    .intro-copy p {
+      color: #59626d;
+      line-height: 1.9;
+      font-size: 1.04rem;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 38px;
+    }
+    .metric {
+      padding-top: 18px;
+      border-top: 1px solid var(--line-dark);
+    }
+    .metric strong { font-size: 2.2rem; }
+    .metric span { display: block; color: #6f7882; margin-top: 6px; font-size: .84rem; }
+
+    .image-stack {
+      position: relative;
+      min-height: 620px;
+    }
+    .image-stack .main-img {
+      height: 560px;
+      border-radius: 34px;
+    }
+    .floating-card {
+      position: absolute;
+      left: -38px;
+      bottom: 0;
+      width: 280px;
+      background: var(--ink);
+      color: var(--white);
+      padding: 28px;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+    .floating-card strong { font-size: 1.6rem; display: block; margin-bottom: 8px; }
+    .floating-card p { color: #b6bdc7; margin: 0; line-height: 1.6; }
+
+    .services { background: var(--ink); }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      align-items: end;
+      margin-bottom: 52px;
+    }
+    .section-head p { max-width: 520px; color: #9da6b2; line-height: 1.8; }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .service-card {
+      min-height: 500px;
+      border-radius: 26px;
+      overflow: hidden;
+      position: relative;
+      background: #161e29;
+    }
+    .service-card img { height: 100%; transition: transform .6s ease; }
+    .service-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent 30%, rgba(5,8,12,.92));
+    }
+    .service-card:hover img { transform: scale(1.05); }
+    .service-copy {
+      position: absolute;
+      inset: auto 22px 24px;
+      z-index: 2;
+    }
+    .service-copy h3 { margin: 0 0 8px; font-size: 1.45rem; }
+    .service-copy p { margin: 0; color: #c4cad1; line-height: 1.55; font-size: .9rem; }
+
+    .process {
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .process-grid {
+      margin-top: 54px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    .step {
+      min-height: 270px;
+      padding: 26px;
+      border: 1px solid var(--line-dark);
+      border-radius: 22px;
+      transition: .3s ease;
+    }
+    .step:hover { transform: translateY(-8px); background: var(--white); box-shadow: 0 24px 50px rgba(18,25,35,.08); }
+    .step-num {
+      display: inline-grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent);
+      font-weight: 800;
+      margin-bottom: 58px;
+    }
+    .step h3 { margin-bottom: 10px; }
+    .step p { color: #65707b; line-height: 1.65; font-size: .92rem; }
+
+    .portfolio { background: var(--ink-2); }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      grid-template-rows: 350px 350px;
+      gap: 18px;
+      margin-top: 48px;
+    }
+    .project {
+      position: relative;
+      overflow: hidden;
+      border-radius: 26px;
+    }
+    .project:first-child { grid-row: 1 / 3; }
+    .project img { height: 100%; transition: transform .7s ease; }
+    .project:hover img { transform: scale(1.04); }
+    .project::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent 45%, rgba(7,10,14,.82));
+    }
+    .project-copy {
+      position: absolute;
+      z-index: 2;
+      left: 24px;
+      bottom: 22px;
+    }
+    .project-copy span { color: var(--accent); font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; }
+    .project-copy h3 { margin: 7px 0 0; font-size: 1.6rem; }
+
+    .contact {
+      background:
+        radial-gradient(circle at 15% 10%, rgba(183,206,57,.14), transparent 30%),
+        var(--paper);
+      color: var(--ink);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 70px;
+      align-items: start;
+    }
+    .contact-copy p { color: #59626d; line-height: 1.8; max-width: 520px; }
+    .contact-card {
+      background: var(--white);
+      padding: 34px;
+      border-radius: 28px;
+      box-shadow: 0 24px 70px rgba(12,18,27,.12);
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { display: grid; gap: 8px; }
+    .field.full { grid-column: 1 / -1; }
+    label { font-size: .8rem; font-weight: 700; }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid #d7dce1;
+      border-radius: 14px;
+      padding: 15px 16px;
+      background: #fbfbfa;
+      color: var(--ink);
+      outline: none;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(183,206,57,.14); }
+    textarea { min-height: 130px; resize: vertical; }
+    .form-note { font-size: .76rem; color: #7a838c; margin-top: 12px; }
+
+    footer {
+      background: #060a0f;
+      padding: 70px 0 30px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, 1fr);
+      gap: 40px;
+    }
+    .footer-copy { color: #8f98a4; line-height: 1.7; max-width: 390px; }
+    .footer-col h4 { margin: 0 0 18px; }
+    .footer-col a { display: block; color: #8f98a4; margin: 11px 0; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      margin-top: 50px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      display: flex;
+      justify-content: space-between;
+      color: #737c86;
+      font-size: .78rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .reveal.show { opacity: 1; transform: none; }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        position: fixed;
+        inset: 82px 20px auto;
+        background: rgba(11,16,23,.98);
+        border: 1px solid rgba(255,255,255,.08);
+        border-radius: 20px;
+        padding: 20px;
+        flex-direction: column;
+        align-items: stretch;
+        display: none;
+      }
+      .nav-links.open { display: flex; }
+      .menu-btn { display: block; }
+      .nav .btn { display: none; }
+      .trust-grid, .service-grid { grid-template-columns: repeat(2, 1fr); }
+      .intro-grid, .contact-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .image-stack { margin-top: 20px; }
+      .portfolio-grid { grid-template-columns: 1fr; grid-template-rows: 520px 320px 320px; }
+      .project:first-child { grid-row: auto; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      :root { --container: min(100% - 26px, 1180px); }
+      .hero h1 { font-size: 3.7rem; }
+      section { padding: 88px 0; }
+      .trust-grid, .service-grid, .process-grid, .metrics, .form-grid, .footer-grid { grid-template-columns: 1fr; }
+      .trust-item { border-right: 0; border-bottom: 1px solid var(--line-dark); }
+      .trust-item:last-child { border-bottom: 0; }
+      .section-head { display: block; }
+      .service-card { min-height: 420px; }
+      .floating-card { left: 12px; right: 12px; width: auto; }
+      .footer-bottom { flex-direction: column; gap: 12px; }
+      .brand-copy strong { font-size: .82rem; }
+      .hero-content { padding-bottom: 80px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="#inicio" class="brand" aria-label="NEXORA Living Studio">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-copy">
+          <strong>NEXORA</strong>
+          <span>LIVING STUDIO</span>
+        </span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#estudio">Estudio</a>
+        <a href="#espacios">Productos</a>
+        <a href="#segmentos">Presupuestos</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#pedidos">Inspiración</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <a class="btn btn-primary" href="#contacto">Agenda tu cita →</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <span class="eyebrow">Diseño · Precisión · Experiencia</span>
+        <h1 class="display">Productos que <span>inspiran</span> tu vida.</h1>
+        <p>
+          Diseñamos, fabricamos e instalamos cocinas, muebles de baño y clósets funcionales,
+          atractivos y adaptados a distintos presupuestos.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contacto">Diseñar mi espacio →</a>
+          <a class="btn btn-ghost" href="#pedidos">Ver pedidos</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-strip">
+      <div class="trust-grid reveal">
+        <article class="trust-item">
+          <span>01</span>
+          <strong>Diseño a tu medida</strong>
+          <p>Cada pedido comienza con tu estilo, tus necesidades y la forma en que quieres vivir.</p>
+        </article>
+        <article class="trust-item">
+          <span>02</span>
+          <strong>Fabricación precisa</strong>
+          <p>Procesos controlados, materiales seleccionados y ensambles preparados para instalar.</p>
+        </article>
+        <article class="trust-item">
+          <span>03</span>
+          <strong>Listo para instalar</strong>
+          <p>Piezas etiquetadas, verificadas y organizadas para una instalación limpia y eficiente.</p>
+        </article>
+        <article class="trust-item">
+          <span>04</span>
+          <strong>Respaldo real</strong>
+          <p>Acompañamiento, garantía y servicio postventa durante toda la vida útil de tus muebles.</p>
+        </article>
+      </div>
+    </div>
+
+    <section class="intro" id="estudio">
+      <div class="container intro-grid">
+        <div class="intro-copy reveal">
+          <span class="eyebrow">NEXORA Living Studio</span>
+          <h2 class="display">Muebles bien diseñados para cada presupuesto.</h2>
+          <p>
+            Somos un estudio de diseño y fabricación especializado en cocinas, muebles de baño y clósets.
+            Trabajamos con opciones económicas, intermedias y residenciales de mayor nivel para que cada cliente
+            encuentre una solución funcional, atractiva y acorde con su presupuesto.
+          </p>
+          <p>
+            Desde la selección de materiales hasta la instalación final, cuidamos medidas, acabados,
+            herrajes y funcionalidad para entregar muebles listos para usarse.
+          </p>
+
+          <div class="metrics">
+            <div class="metric"><strong>3</strong><span>Líneas de presupuesto</span></div>
+            <div class="metric"><strong>1</strong><span>Diseño adaptado a tu espacio</span></div>
+            <div class="metric"><strong>100%</strong><span>Fabricación a medida</span></div>
+          </div>
+        </div>
+
+        <div class="image-stack reveal">
+          <img class="main-img" src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=1200&q=85" alt="Baño moderno diseñado por NEXORA">
+          <div class="floating-card">
+            <strong>Elige según tu presupuesto.</strong>
+            <p>Opciones claras en materiales, acabados y herrajes para tomar una buena decisión.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="espacios">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Tu espacio, tu estilo</span>
+            <h2 class="display">Tres categorías, una misma atención.</h2>
+          </div>
+          <p>
+            Te mostramos alternativas económicas, intermedias y de mayor nivel para que elijas según tu presupuesto,
+            sin perder funcionalidad, diseño ni claridad en la cotización.
+          </p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card reveal">
+            <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=900&q=82" alt="Cocina personalizada">
+            <div class="service-copy"><h3>Cocinas</h3><p>Funcionalidad, estética y precisión en cada módulo.</p></div>
+          </article>
+          <article class="service-card reveal">
+            <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=900&q=82" alt="Baño personalizado">
+            <div class="service-copy"><h3>Muebles de baño</h3><p>Lavabos, gabinetes, espejos y almacenamiento funcional a medida.</p></div>
+          </article>
+          <article class="service-card reveal">
+            <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=82" alt="Vestidor personalizado">
+            <div class="service-copy"><h3>Clósets</h3><p>Soluciones prácticas de almacenamiento para recámaras y vestidores.</p></div>
+          </article>
+          <article class="service-card reveal">
+            <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=82" alt="Mobiliario personalizado">
+            <div class="service-copy"><h3>Líneas por presupuesto</h3><p>Opciones económica, intermedia y residencial alto según materiales y herrajes.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="segments" id="segmentos" style="background:#0b1017;padding:110px 0;">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Elige tu nivel</span>
+            <h2 class="display">Una opción para cada presupuesto.</h2>
+          </div>
+          <p>
+            La diferencia está en los materiales, herrajes, acabados y nivel de personalización.
+            La atención, el diseño y la claridad en la cotización se mantienen en todas las líneas.
+          </p>
+        </div>
+        <div class="service-grid">
+          <article class="step reveal" style="background:#f5f1e9;color:#0b1017;">
+            <span class="step-num">$</span>
+            <h3>Línea Esencial</h3>
+            <p>Soluciones funcionales, materiales rendidores y diseños prácticos para cuidar el presupuesto.</p>
+          </article>
+          <article class="step reveal" style="background:#ffffff;color:#0b1017;">
+            <span class="step-num">$$</span>
+            <h3>Línea Selecta</h3>
+            <p>Mejores acabados, mayor variedad de colores, herrajes superiores y más personalización.</p>
+          </article>
+          <article class="step reveal" style="background:#dfe6ca;color:#0b1017;">
+            <span class="step-num">$$$</span>
+            <h3>Línea Signature</h3>
+            <p>Materiales premium, detalles especiales, accesorios de alto nivel y diseño más exclusivo.</p>
+          </article>
+          <article class="step reveal" style="background:#111923;color:#ffffff;border-color:rgba(255,255,255,.14);">
+            <span class="step-num">✓</span>
+            <h3>Cotización clara</h3>
+            <p style="color:#c1c8d0;">Te explicamos qué incluye cada opción para que elijas sin sorpresas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="process" id="proceso">
+      <div class="container">
+        <span class="eyebrow">Nuestro proceso</span>
+        <h2 class="display reveal">Simple, transparente y sin sorpresas.</h2>
+
+        <div class="process-grid">
+          <article class="step reveal">
+            <span class="step-num">01</span>
+            <h3>Conocemos</h3>
+            <p>Escuchamos tus ideas, necesidades, medidas y expectativas.</p>
+          </article>
+          <article class="step reveal">
+            <span class="step-num">02</span>
+            <h3>Diseñamos</h3>
+            <p>Desarrollamos propuesta visual, distribución y selección de materiales.</p>
+          </article>
+          <article class="step reveal">
+            <span class="step-num">03</span>
+            <h3>Planificamos</h3>
+            <p>Preparamos ingeniería, producción, compras y calendario del pedido.</p>
+          </article>
+          <article class="step reveal">
+            <span class="step-num">04</span>
+            <h3>Fabricamos</h3>
+            <p>Creamos cada pieza con controles de calidad y precisión.</p>
+          </article>
+          <article class="step reveal">
+            <span class="step-num">05</span>
+            <h3>Instalamos</h3>
+            <p>Montamos, verificamos, limpiamos y entregamos el espacio terminado.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio" id="pedidos">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Inspiración que inspiran</span>
+            <h2 class="display">Productos reales. Historias reales.</h2>
+          </div>
+          <p>
+            Ejemplos de cocinas, muebles de baño y clósets con distintas combinaciones de materiales,
+            acabados y presupuestos.
+          </p>
+        </div>
+
+        <div class="portfolio-grid">
+          <article class="project reveal">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=88" alt="Pedido residencial NEXORA">
+            <div class="project-copy"><span>Cocina</span><h3>Línea Residencial Alto</h3></div>
+          </article>
+          <article class="project reveal">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85" alt="Cocina contemporánea">
+            <div class="project-copy"><span>Clóset</span><h3>Línea Intermedia</h3></div>
+          </article>
+          <article class="project reveal">
+            <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85" alt="Interior contemporáneo">
+            <div class="project-copy"><span>Mueble de baño</span><h3>Línea Económica</h3></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contacto">
+      <div class="container contact-grid">
+        <div class="contact-copy reveal">
+          <span class="eyebrow">Comencemos</span>
+          <h2 class="display">Tu nuevo espacio está a una decisión.</h2>
+          <p>
+            Cuéntanos qué mueble necesitas, tus medidas aproximadas y el rango de presupuesto que tienes.
+            Nuestro equipo te contactará para orientarte y preparar una propuesta inicial.
+          </p>
+        </div>
+
+        <form class="contact-card reveal" id="contactForm">
+          <div class="form-grid">
+            <div class="field">
+              <label for="nombre">Nombre</label>
+              <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required>
+            </div>
+            <div class="field">
+              <label for="telefono">Teléfono</label>
+              <input id="telefono" name="telefono" type="tel" placeholder="55 0000 0000" required>
+            </div>
+            <div class="field">
+              <label for="email">Correo</label>
+              <input id="email" name="email" type="email" placeholder="correo@ejemplo.com" required>
+            </div>
+            <div class="field">
+              <label for="tipo">Tipo de pedido</label>
+              <select id="tipo" name="tipo">
+                <option>Cocina</option>
+                <option>Baño</option>
+                <option>Clóset</option>
+                <option>Mueble de baño</option>
+                <option>Cocina y clóset</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="mensaje">Cuéntanos sobre tu idea</label>
+              <textarea id="mensaje" name="mensaje" placeholder="Medidas aproximadas, presupuesto, color, estilo y fecha estimada..."></textarea>
+            </div>
+            <div class="field full">
+              <button class="btn btn-primary" type="submit">Solicitar una cita →</button>
+              <p class="form-note">Este formulario es demostrativo. Puedes conectarlo a Formspree, HubSpot, WhatsApp o Power Automate.</p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#inicio" class="brand">
+            <span class="brand-mark"></span>
+            <span class="brand-copy"><strong>NEXORA</strong><span>LIVING STUDIO</span></span>
+          </a>
+          <p class="footer-copy">Diseño, fabricación e instalación de cocinas, muebles de baño y clósets para distintos presupuestos.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Estudio</h4>
+          <a href="#estudio">Nosotros</a>
+          <a href="#segmentos">Presupuestos</a>
+        <a href="#proceso">Proceso</a>
+          <a href="#pedidos">Inspiración</a>
+        </div>
+        <div class="footer-col">
+          <h4>Productos</h4>
+          <a href="#espacios">Cocinas</a>
+          <a href="#espacios">Muebles de baño</a>
+          <a href="#espacios">Clósets</a>
+          <a href="#espacios">Líneas por presupuesto</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <a href="tel:+525500000000">+52 55 0000 0000</a>
+          <a href="mailto:hola@nexoraliving.mx">hola@nexoraliving.mx</a>
+          <a href="#contacto">Agenda tu cita</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 NEXORA Living Studio. Todos los derechos reservados.</span>
+        <span>Aviso de privacidad · Términos y condiciones</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById("navbar");
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    window.addEventListener("scroll", () => {
+      nav.classList.toggle("scrolled", window.scrollY > 30);
+    });
+
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => navLinks.classList.remove("open"));
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("show");
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    document.getElementById("contactForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const nombre = document.getElementById("nombre").value.trim();
+      alert(`Gracias${nombre ? ", " + nombre : ""}. Tu solicitud fue registrada en esta demostración.`);
+      event.target.reset();
+    });
+  </script>
+</body>
+</html>
